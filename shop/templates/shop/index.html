@@ -65,9 +65,9 @@
           </div>
         </div>
         {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
-      </div>
+      </div><div class="carousel-item">
         {%endif%}
-        {%endfor%}</div>
+        {%endfor%}</div></div></div>
     <!-- left and right controls for the slide -->
     <a class="carousel-control-prev" href="#demo" data-slide="prev">
         <span class="carousel-control-prev-icon"></span>
@@ -77,4 +77,4 @@
     </a>
 
 {%endblock%}
-</div></div>
+</div>
