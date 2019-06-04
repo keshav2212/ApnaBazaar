@@ -4,7 +4,7 @@ from .models import product
 from math import ceil
 def index(request):
 	products=product.objects.all()
-	print(produts)
+	print(products)
 	n=len(products)
 	nslides=(n//4)+(ceil(n/4)-n//4)
 	param={'no_of_slides':nslides,'range':range(1,nslides),'product':products}
