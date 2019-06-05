@@ -49,7 +49,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{product.0.product_name}}</h5>
                 <p class="card-text">{{product.0.desc}}</p>
-                <a href="#" class="btn btn-primary">Add to Cart</a>
+              <button class="btn btn-primary cart">>Add to Cart</button>
             </div>
           </div>
        </div>
@@ -60,14 +60,14 @@
             <div class="card-body">
               <h5 class="card-title">{{i.product_name}}</h5>
               <p class="card-text">{{i.desc}}</p>
-              <a href="#" class="btn btn-primary">Add to Cart</a>
+              <button class="btn btn-primary cart">>Add to Cart</button>
             </div>
           </div>
         </div>
         {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
       </div><div class="carousel-item">
         {%endif%}
-        {%endfor%}</div></div>
+        {%endfor%}</div></div></div>
     <!-- left and right controls for the slide -->
     <a class="carousel-control-prev" href="#demo" data-slide="prev">
         <span class="carousel-control-prev-icon"></span>
@@ -75,5 +75,20 @@
     <a class="carousel-control-next" href="#demo" data-slide="next">
         <span class="carousel-control-next-icon"></span>
     </a>
+</div>
+{%endblock%}
+{%block js %}
+<script type="text/javascript">
+  console.log('working')
+  if(localStorage.getItem==null){
+    var cart={}
+  }
+  else{
+    cart=JSON.parse(localStorage.getItem('cart'));
 
-{%endblock%}</div>
+  }
+  $('.cart').click(function(){
+console.log('clicked');
+  })
+</script>
+{% endblock %}
