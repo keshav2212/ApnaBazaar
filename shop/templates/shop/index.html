@@ -49,7 +49,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{product.0.product_name}}</h5>
                 <p class="card-text">{{product.0.desc}}</p>
-              <button class="btn btn-primary cart">>Add to Cart</button>
+              <button class="btn btn-primary cart " id='{{product.0.id}}'>>Add to Cart</button>
             </div>
           </div>
        </div>
@@ -60,7 +60,7 @@
             <div class="card-body">
               <h5 class="card-title">{{i.product_name}}</h5>
               <p class="card-text">{{i.desc}}</p>
-              <button class="btn btn-primary cart">>Add to Cart</button>
+              <button class="btn btn-primary cart" id='{{i.id}}'>Add to Cart</button>
             </div>
           </div>
         </div>
@@ -89,6 +89,8 @@
   }
   $('.cart').click(function(){
 console.log('clicked');
+var idstr=this.id.toString();
+console.log(idstr);
   })
 </script>
 {% endblock %}
