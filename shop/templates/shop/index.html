@@ -1,33 +1,5 @@
 {% extends 'shop/basic.html' %}
 {% block title %}Home{% endblock%}
-      {% block style %}
-          .col-md-3
-          {
-          display: inline-block;
-          margin-left:-4px;
-          }
-          .carousel-indicators .active {
-          background-color: blue;
-            }
-          .col-md-3 img{
-          width:255px;
-          height:355px;
-          }
-          body .carousel-indicator li{
-          background-color: blue;
-          }
-          body .carousel-indicators{
-          bottom: 0;
-          }
-          body .carousel-control-prev-icon,
-          body .carousel-control-next-icon{
-          background-color: blue;
-          }
-           body .no-padding{
-           padding-left: 0,
-           padding-right: 0;
-           }
-           {%endblock%}
   {%block body %}
   {% load static %}
 <div class="container">
@@ -42,41 +14,20 @@
     <!--Slideshow starts here -->
     <div class="container carousel-inner no-padding">
 
-      <div class="carousel-item active">
-        <div class="col-xs-3 col-sm-3 col-md-3">
+      {% for i in product %}
+        <div class="col-xs-3 col-sm-3 col-md-3 mt-3" style="float: left;margin-left: 40px; width: 300px;height: 400px;">
           <div class="card" style="width: 18rem;">
-            <img src='/media/{{product.0.image}}' class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{product.0.product_name}}</h5>
-                <p class="card-text">{{product.0.desc}}</p>
-              <button class="btn btn-primary cart " id='pr{{product.0.id}}'>>Add to Cart</button>
-            </div>
-          </div>
-       </div>
-      {% for i in product|slice:"1:"%}
-        <div class="col-xs-3 col-sm-3 col-md-3">
-          <div class="card" style="width: 18rem;">
-            <img src='/media/{{i.image}}' class="card-img-top" alt="...">
+            <img src='/media/{{i.image}}' style="width: 200px; height: 200px; margin: auto;margin-top: 12px;" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{i.product_name}}</h5>
-              <p class="card-text">{{i.desc}}</p>
-              <button class="btn btn-primary cart" id='pr{{i.id}}'>Add to Cart</button>
+              <p class="card-text" style="color: gray;">{{i.desc}}</p>
+              <p style="text-align: center;">Rs. {{i.price}}/-</p>
+              <button class="btn btn-primary btn-sm" style="display: block; margin: auto;" id='pr{{i.id}}'>Add to Cart</button>
             </div>
           </div>
         </div>
-        {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
-      </div><div class="carousel-item">
-        {%endif%}
-        {%endfor%}</div></div></div>
-    <!-- left and right controls for the slide -->
-    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a class="carousel-control-next" href="#demo" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </a>
-</div>
-{%endblock%}
+        {% endfor %}
+{% endblock %}
 {%block js %}
 <script>
   console.log('working')

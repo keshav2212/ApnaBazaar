@@ -3,12 +3,15 @@ from django.http import HttpResponse
 from .models import product
 from math import ceil
 def index(request):
-	products=product.objects.all()
-	print(products)
-	n=len(products)
-	nslides=(n//4)+(ceil(n/4)-n//4)
-	param={'no_of_slides':nslides,'range':range(1,nslides),'product':products}
-	return render(request,"shop/index.html",param)
+	filter = request.GET.get('product',None)
+	context = {}
+	if filter is not None:
+		products=product.objects.filter(product_name__contains = filter)
+		context['filter'] = filter
+	else:
+		products=product.objects.all()
+	context['product'] = products
+	return render(request,"shop/index.html",context)
 def about(request):
 	return render(request,"shop/about.html")
 def contact(request):
@@ -21,5 +24,3 @@ def search(request):
 	return HttpResponse("We are at search")
 def tracker(request):
 	return HttpResponse("We are at tracker")
-
-# Create your views here.
