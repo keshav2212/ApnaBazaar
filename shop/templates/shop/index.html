@@ -1,11 +1,14 @@
 {% extends 'shop/basic.html' %}
 {% block title %}Home{% endblock%}
+{% block style%}
+  body{
+  font: 1rem/1.5 "PT Sans", Arial, sans-serif;
+}
+{% endblock %}
   {%block body %}
   {% load static %}
 <div class="container">
-    <!--Slideshow starts here -->
-    <div class="container carousel-inner no-padding">
-
+  <div class="container carousel-inner no-padding"> 
       {% for i in product %}
         <div class="col-xs-3 col-sm-3 col-md-3 mt-3" style="float: left;margin-left: 40px; width: 300px;height: 400px;">
           <div class="card" style="width: 18rem;">
@@ -19,29 +22,4 @@
           </div>
         </div>
         {% endfor %}
-{% endblock %}
-{%block js %}
-<script>
-  console.log('working')
-  if(localStorage.getItem==null){
-    var cart={}
-  }
-  else{
-    cart=JSON.parse(localStorage.getItem('cart'));
-
-  }
-  console.log(cart)
-  $('.cart').click(function(){
-console.log('clicked');
-var idstr=this.id.toString();
-console.log(idstr);
-if(cart[idstr]!=undefined){
-  cart[idstr] = cart[idstr]+1;
-}
-else{
-  cart[idstr] = 1;
-}
-console.log(cart);
-  });
-</script>
 {% endblock %}
