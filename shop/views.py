@@ -2,14 +2,29 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import product
 from math import ceil
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
 def index(request):
 	filter = request.GET.get('product',None)
 	context = {}
 	if filter is not None:
-		products=product.objects.filter(product_name__contains = filter)
-		context['filter'] = filter
+		if cache.get(filter):
+			print("Come from Cache.")
+			context['filter'] = cache.get('filter')
+		else:
+			print("Come from DB.")
+			products=product.objects.filter(product_name__contains = filter)
+			cache.set(filter, products)
+			context['filter'] = filter
 	else:
-		products=product.objects.all()
+		if cache.get("all"):
+			print("came from cache")
+			products = cache.get("all")
+		else:
+			print("came from db")
+			products=product.objects.all()
+			cache.set("all", products)
 	context['product'] = products
 	return render(request,"shop/index.html",context)
 def about(request):
