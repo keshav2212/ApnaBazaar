@@ -7,7 +7,6 @@
 
 ##### Used Packages :
 ###### Redis : Used For Less Database Calls
-###### Pillow : 
 ###### dj_django_url : Used for getting database cofig from Heroku envrironment.
 ###### Pillow : To Store the images of products.
 ###### django_heroku : To deploy it on heroku.
