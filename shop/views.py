@@ -14,7 +14,7 @@ def index(request):
 		# 	context['filter'] = cache.get('filter')
 		# else:
 		products=product.objects.filter(product_name__contains = filter)
-		cache.set(filter, products)
+		#cache.set(filter, products)
 		context['filter'] = filter
 	else:
 		# if cache.get("all"):
@@ -22,7 +22,7 @@ def index(request):
 		# 	products = cache.get("all")
 		# else:
 		products=product.objects.all()
-		cache.set("all", products)
+		#cache.set("all", products)
 	context['product'] = products
 	return render(request,"shop/index.html",context)
 def about(request):
