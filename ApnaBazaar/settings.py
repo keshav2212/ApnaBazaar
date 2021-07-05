@@ -13,7 +13,7 @@ SECRET_KEY = 'ew0)v=zy=tb2(1si4s1t%_hyh3li)5d144as5ep067i$xng@lu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 import django_heroku
 
