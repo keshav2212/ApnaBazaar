@@ -17,7 +17,7 @@
               <h5 class="card-title">{{i.product_name}}</h5>
               <p class="card-text" style="color: gray;">{{i.desc}}</p>
               <p style="text-align: center;">Rs. {{i.price}}/-</p>
-              <button class="btn btn-primary btn-sm" style="display: block; margin: auto;" id='pr{{i.id}}'>Add to Cart</button>
+              <div style="text-align: center;"><a class="btn btn-primary btn-sm" style="display: inline-block; margin: auto;color: white;" href="{% url 'addtocart' i.id %}" id='pr{{i.id}}'>Add to Cart</a></div>
             </div>
           </div>
         </div>

@@ -29,6 +29,18 @@ def index(request):
 		#cache.set("all", products)
 	context['product'] = products
 	return render(request,"shop/index.html",context)
+
+def addtocart(request, id):
+	prod = product.objects.get(id=id)
+	if 'current' not in request.session:
+		request.session['current'] = []
+	else:
+		if prod.id not in request.session['current']:
+			print(request.session['current'])
+			request.session['current'].append(prod.id)
+	print(request.session['current'])
+	return redirect('/')
+
 def about(request):
 	return render(request,"shop/about.html")
 def contact(request):

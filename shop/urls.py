@@ -12,4 +12,5 @@ path("checkout/",views.checkout,name="Checkout"),
 path('login',views.login1,name='login'),
 path('logout',views.logout1,name='logout'),
 path('register',views.register,name='register'),    
+path('addtocart/<int:id>',views.addtocart, name='addtocart'),
 ]
