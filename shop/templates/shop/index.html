@@ -17,7 +17,14 @@
               <h5 class="card-title">{{i.product_name}}</h5>
               <p class="card-text" style="color: gray;">{{i.desc}}</p>
               <p style="text-align: center;">Rs. {{i.price}}/-</p>
+              {% if request.user.is_authenticated %}
+              {% if i.id in cart %}
+              <div style="text-align: center;"><a class="btn btn-danger btn-sm" style="display: inline-block; margin: auto;color: white;" href="{% url 'removefromcart' i.id %}" id='pr{{i.id}}'>Remove</a></div>
+              {% else %}
               <div style="text-align: center;"><a class="btn btn-primary btn-sm" style="display: inline-block; margin: auto;color: white;" href="{% url 'addtocart' i.id %}" id='pr{{i.id}}'>Add to Cart</a></div>
+              {% endif %}
+              {% endif %}
+             
             </div>
           </div>
         </div>

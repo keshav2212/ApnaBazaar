@@ -14,6 +14,19 @@
       body{
   font: 1rem/1.5 "PT Sans", Arial, sans-serif;
 }
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+ }
+.dropdown-menu{
+  margin-left: -30px;
+  border: none;
+}
+.dropdown-item{
+  padding: 5px 0px 5px 0px;
+  text-align: center;
+  color: white;
+}
 </style>
   </head>
   <body>
@@ -39,19 +52,29 @@
       <button class="my-2 my-sm-0 btn-sm" style="color: white;background-color: transparent;border: none;" type="submit">Search</button>
       </form>
     {% if user.is_authenticated %}
-    <a class=" btn-sm my-2 my-sm-0 mr-3" style="color: white;" href="{% url 'home' %}">Hi, {{user.username|capfirst}}</a>
-    <a class="btn-sm my-2 my-sm-0 mr-3" style="color: white;" href="{% url 'logout' %}">Sign Out</a>
+    <div class="dropdown">
+      <button class="btn btn-sm btn-secondary dropdown-toggle mr-3" style="background-color: transparent;border: none;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Hi, {{user.username|capfirst}}
+      </button>
+      <div class="dropdown-menu navbar-dark bg-dark" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item btn-sm" href="#">My Cart{% if cart|length is not 0 %}&nbsp<sup style="border: 0.1px solid white;border-radius: 80px;padding: 0px 2px 0px 2px;">{{cart|length}}</sup>{% endif %}</a>
+        <a class="dropdown-item btn-sm" href="#">Order History</a>
+        <a class="dropdown-item btn-sm" href="#">Profile</a>
+        <a class="dropdown-item btn-sm" href="{% url 'logout' %}">Logout</a>
+    
+      </div>
+    </div>
     {% else %}
-    <a class=" btn-sm my-2 my-sm-0 mr-3" style="color: white;" href="{% url 'login' %}">Sign In</a>
-    <a class=" btn-sm my-2 my-sm-0" style="color: white;" href="{% url 'register' %}">Sign Up</a>
+    {% ifnotequal request.path '/login' %}
+    <a class=" btn-sm my-2 my-sm-0 mr-3" style="color: white;text-decoration: none;" href="{% url 'login' %}">Login</a>
+    {% endifnotequal %}
     {% endif %}
-
   </div>
 </nav>
 <br>
 {% if messages %}
 {% for message in messages %}
-<div class='alert alert-{{ message.tags }}' id="msg">{{message}}</div>
+<div class='alert alert-{{ message.tags }}' id="msg" style="width: 80%;margin:auto">{{message}}</div>
 {% endfor %}
 {% endif %}  
 <br>

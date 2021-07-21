@@ -1,17 +1,21 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import product
+from .models import *
 from math import ceil
+from django.db.models import Q
 from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
-
+from django.contrib.auth.decorators import login_required
 # from django.core.cache.backends.base import DEFAULT_TIMEOUT
 # from django.views.decorators.cache import cache_page
 # from django.core.cache import cache
 def index(request):
 	filter = request.GET.get('product',None)
 	context = {}
+	if request.user.is_authenticated:
+		cart = Cart.objects.filter(user = request.user).values('product__id')
+		context['cart'] = [d['product__id'] for d in cart]
 	if filter is not None:
 		# if cache.get(filter):
 		# 	print("Come from Cache.")
@@ -30,16 +34,21 @@ def index(request):
 	context['product'] = products
 	return render(request,"shop/index.html",context)
 
+@login_required
 def addtocart(request, id):
 	prod = product.objects.get(id=id)
-	if 'current' not in request.session:
-		request.session['current'] = []
-	else:
-		if prod.id not in request.session['current']:
-			print(request.session['current'])
-			request.session['current'].append(prod.id)
-	print(request.session['current'])
+	cart = Cart.objects.filter(Q(user = request.user) & Q(product = prod))
+	if len(cart) is 0:
+		instance = Cart(product = prod, user = request.user)
+		instance.save()
 	return redirect('/')
+
+@login_required
+def removefromcart(request, id):
+	cart = Cart.objects.filter(Q(user = request.user) & Q(product__id = id))
+	cart.delete()
+	return redirect('/')
+
 
 def about(request):
 	return render(request,"shop/about.html")
