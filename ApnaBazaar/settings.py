@@ -14,8 +14,6 @@ SECRET_KEY = 'ew0)v=zy=tb2(1si4s1t%_hyh3li)5d144as5ep067i$xng@lu'
 DEBUG = True
 
 import os
-if 'PASSWORD' in os.environ:
-    PASSWORD = os.environ['PASSWORD']
 
 ALLOWED_HOSTS = ["*"]
 

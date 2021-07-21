@@ -33,7 +33,6 @@ def index(request):
 		products=product.objects.all()
 		#cache.set("all", products)
 	context['product'] = products
-	context['key'] = settings.PASSWORD
 	return render(request,"shop/index.html",context)
 
 @login_required
