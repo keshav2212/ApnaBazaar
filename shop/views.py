@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
 from math import ceil
+from django.conf import settings
 from django.db.models import Q
 from django.contrib import messages
 from django.shortcuts import render,redirect
@@ -32,6 +33,7 @@ def index(request):
 		products=product.objects.all()
 		#cache.set("all", products)
 	context['product'] = products
+	context['key'] = settings.PASSWORD
 	return render(request,"shop/index.html",context)
 
 @login_required
