@@ -15,7 +15,6 @@ DEBUG = True
 PRODUCTION = True
 
 if PRODUCTION:
-    DEBUG = False
     conf = os.environ
 else:
     from config import variables
