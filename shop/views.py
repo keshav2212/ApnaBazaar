@@ -8,9 +8,11 @@ from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
+from imagekitio import ImageKit
 # from django.core.cache.backends.base import DEFAULT_TIMEOUT
 # from django.views.decorators.cache import cache_page
 # from django.core.cache import cache
+
 def index(request):
 	filter = request.GET.get('product',None)
 	context = {}
@@ -33,6 +35,7 @@ def index(request):
 		products=product.objects.all()
 		#cache.set("all", products)
 	context['product'] = products
+	context['path'] = Image_Path.objects.filter(product__in=products)
 	return render(request,"shop/index.html",context)
 
 @login_required
@@ -103,3 +106,4 @@ def register(request):
 			messages.error(request,"Your password didn't match!")
 			return redirect('/register')
 	return render(request,'shop/register.html')
+

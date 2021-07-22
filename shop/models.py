@@ -16,6 +16,10 @@ class product(models.Model):
 	def __str__(self):
 		return self.product_name
 
+class Image_Path(models.Model):
+	product = models.OneToOneField(product, on_delete= models.CASCADE)
+	path = models.CharField(max_length = 254, null=True, blank=True)
+
 class Cart(models.Model):
 	product = models.ForeignKey(product, on_delete= models.CASCADE)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)

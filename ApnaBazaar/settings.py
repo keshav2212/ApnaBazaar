@@ -12,8 +12,14 @@ SECRET_KEY = 'ew0)v=zy=tb2(1si4s1t%_hyh3li)5d144as5ep067i$xng@lu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+PRODUCTION = False
 
-import os
+if PRODUCTION:
+    DEBUG = False
+    conf = os.environ
+else:
+    from config import variables
+    conf = variables
 
 ALLOWED_HOSTS = ["*"]
 
@@ -58,6 +64,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            # 'libraries':{
+            # 'image_path_tag': 'shop.templatetags.image_path_tag',
+            
+            # }
         },
     },
 ]
@@ -139,3 +149,7 @@ MEDIA_URL="/media/"
 
 
 django_heroku.settings(locals())
+
+IMAGEKIT_URL_ENDPOINT = conf['IMAGEKIT_URL_ENDPOINT']
+IMAGEKIT_PRIVATE_KEY = conf['IMAGEKIT_PRIVATE_KEY']
+IMAGEKIT_PUBLIC_KEY = conf['IMAGEKIT_PUBLIC_KEY']
