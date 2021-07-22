@@ -18,6 +18,7 @@ class product(models.Model):
 
 class Image_Path(models.Model):
 	product = models.OneToOneField(product, on_delete= models.CASCADE)
+	image_id = models.CharField(max_length = 254, null=True, blank= True)
 	path = models.CharField(max_length = 254, null=True, blank=True)
 
 class Cart(models.Model):

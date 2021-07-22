@@ -59,7 +59,7 @@
         Hi, {{user.username|capfirst}}
       </button>
       <div class="dropdown-menu navbar-dark bg-dark" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item btn-sm" href="#">My Cart{% if cart|length is not 0 %}&nbsp<sup style="border: 0.1px solid white;border-radius: 80px;padding: 0px 2px 0px 2px;">{{cart|length}}</sup>{% endif %}</a>
+        <a class="dropdown-item btn-sm mt-2" href="#">My Cart{% if cart|length is not 0 %}&nbsp<sup style="border: 0.1px solid white;border-radius: 80px;padding: 0px 2px 0px 2px;">{{cart|length}}</sup>{% endif %}</a>
         <a class="dropdown-item btn-sm" href="#">Order History</a>
         <a class="dropdown-item btn-sm" href="#">Profile</a>
         <a class="dropdown-item btn-sm" href="{% url 'logout' %}">Logout</a>

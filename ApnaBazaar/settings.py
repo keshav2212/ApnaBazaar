@@ -12,9 +12,10 @@ SECRET_KEY = 'ew0)v=zy=tb2(1si4s1t%_hyh3li)5d144as5ep067i$xng@lu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-PRODUCTION = True
+PRODUCTION = False
 
-if PRODUCTION:
+if 'PRODUCTION' in os.environ:
+    PRODUCTION = True
     conf = os.environ
 else:
     from config import variables
